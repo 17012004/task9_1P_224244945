@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master, develop ] # Trigger on pushes to main and develop branches
+    branches: [ main, develop, master ] # Trigger on pushes to main, develop, and master branches
   pull_request:
-    branches: [ master, develop ] # Trigger on pull requests to main and develop branches
+    branches: [ main, develop, master ] # Trigger on pull requests to main, develop, and master branches
 
 jobs:
   build:
