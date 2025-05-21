@@ -24,9 +24,11 @@ jobs:
         cache: maven # Cache Maven dependencies to speed up builds
 
     - name: Build with Maven # Command to build the project and run tests
+      # working-directory: ./task9_1P_224244945 # REMOVED: pom.xml is in the repository root
       run: mvn -B package --file pom.xml # -B for batch mode (non-interactive), package to compile, test, and package
 
     - name: Run Unit Tests # Explicitly run tests (though 'package' already does this)
+      # working-directory: ./task9_1P_224244945 # REMOVED: pom.xml is in the repository root
       run: mvn test # Ensures tests are run and results are captured
 
     # Optional: Upload test reports or build artifacts
