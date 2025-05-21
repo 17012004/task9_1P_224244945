@@ -1,0 +1,42 @@
+# This workflow will build a Java project with Maven and run unit tests
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main, develop ] # Trigger on pushes to main and develop branches
+  pull_request:
+    branches: [ main, develop ] # Trigger on pull requests to main and develop branches
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+    - uses: actions/checkout@v4 # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+    - name: Set up JDK 17 # Use Java Development Kit version 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven # Cache Maven dependencies to speed up builds
+
+    - name: Build with Maven # Command to build the project and run tests
+      run: mvn -B package --file pom.xml # -B for batch mode (non-interactive), package to compile, test, and package
+
+    - name: Run Unit Tests # Explicitly run tests (though 'package' already does this)
+      run: mvn test # Ensures tests are run and results are captured
+
+    # Optional: Upload test reports or build artifacts
+    # - name: Upload JaCoCo Coverage Report
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: jacoco-report
+    #     path: target/site/jacoco/jacoco.xml
+
+    # - name: Upload JAR artifact
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: login-service-app
+    #     path: target/*.jar
