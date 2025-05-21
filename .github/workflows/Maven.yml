@@ -15,6 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4 # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+
     - name: Set up JDK 21 # Use Java Development Kit version 21
       uses: actions/setup-java@v4
       with:
@@ -23,9 +24,11 @@ jobs:
         cache: maven # Cache Maven dependencies to speed up builds
 
     - name: Build with Maven # Command to build the project and run tests
+      working-directory: ./task9_1P_224244945 # <--- UPDATED: Assuming pom.xml is in this subfolder
       run: mvn -B package --file pom.xml # -B for batch mode (non-interactive), package to compile, test, and package
 
     - name: Run Unit Tests # Explicitly run tests (though 'package' already does this)
+      working-directory: ./task9_1P_224244945 # <--- UPDATED: Assuming pom.xml is in this subfolder
       run: mvn test # Ensures tests are run and results are captured
 
     # Optional: Upload test reports or build artifacts
